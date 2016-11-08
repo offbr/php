@@ -1,0 +1,183 @@
+-- phpMyAdmin SQL Dump
+-- version 2.11.11
+-- http://www.phpmyadmin.net
+--
+-- 호스트:
+-- 처리한 시간: 13-08-01 00:17 
+-- 서버 버전: 5.0.77
+-- PHP 버전: 5.2.17
+
+SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+
+--
+-- 데이터베이스:
+--
+
+-- --------------------------------------------------------
+
+--
+-- 테이블 구조 `store_categories`
+--
+
+CREATE TABLE IF NOT EXISTS `store_categories` (
+  `id` int(11) NOT NULL auto_increment,
+  `cat_title` varchar(50) NOT NULL,
+  `cat_desc` text NOT NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=euckr AUTO_INCREMENT=4 ;
+
+--
+-- 테이블의 덤프 데이터 `store_categories`
+--
+
+INSERT INTO `store_categories` (`id`, `cat_title`, `cat_desc`) VALUES
+(1, 'hats', 'funky hats in all shapes and sizes!'),
+(2, 'Shirts', 'From t-shirts to swearshirts to polo shirts and beyond.'),
+(3, 'Books', 'hardback, books for school or play');
+
+-- --------------------------------------------------------
+
+--
+-- 테이블 구조 `store_items`
+--
+
+CREATE TABLE IF NOT EXISTS `store_items` (
+  `id` int(11) NOT NULL auto_increment,
+  `cat_id` int(11) NOT NULL,
+  `item_title` varchar(75) NOT NULL,
+  `item_price` float(8,2) NOT NULL,
+  `item_desc` text NOT NULL,
+  `item_image` varchar(50) NOT NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=euckr AUTO_INCREMENT=10 ;
+
+--
+-- 테이블의 덤프 데이터 `store_items`
+--
+
+INSERT INTO `store_items` (`id`, `cat_id`, `item_title`, `item_price`, `item_desc`, `item_image`) VALUES
+(1, 1, 'baseball hat', 12.00, 'fancy, low-profile baseball hat', 'size01.jpg'),
+(2, 1, 'cowboy hat', 52.00, '10 gallon variety', 'size02.jpg'),
+(3, 1, 'top hat', 102.00, 'good for costumes.', 'size03.jpg'),
+(4, 2, 'short-sleeved t-shirt', 12.00, '100% cotton, pre-shrunk.', 'size04.jpg'),
+(5, 2, 'long-sleeved t-shirt', 15.00, 'just like the short-sleeved shirt, with longer sleeves.', 'size05.jpg'),
+(6, 2, 'sweatshirt', 22.00, 'heavy and warm', 'size06.jpg'),
+(7, 3, 'jane\\''s self-help book', 12.00, 'jane gives advice', 'size07.jpg'),
+(8, 3, 'generic academic book', 35.00, 'some required reading for school, will put you to sleep', 'size08.jpg'),
+(9, 3, 'chicago manual of style', 9.99, 'good for copywriters.', 'size09.jpg');
+
+-- --------------------------------------------------------
+
+--
+-- 테이블 구조 `store_item_color`
+--
+
+CREATE TABLE IF NOT EXISTS `store_item_color` (
+  `item_id` int(11) NOT NULL,
+  `item_color` varchar(25) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=euckr;
+
+--
+-- 테이블의 덤프 데이터 `store_item_color`
+--
+
+INSERT INTO `store_item_color` (`item_id`, `item_color`) VALUES
+(1, 'red'),
+(1, 'black'),
+(1, 'blue');
+
+-- --------------------------------------------------------
+
+--
+-- 테이블 구조 `store_item_size`
+--
+
+CREATE TABLE IF NOT EXISTS `store_item_size` (
+  `item_id` int(11) NOT NULL,
+  `item_size` varchar(25) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=euckr;
+
+--
+-- 테이블의 덤프 데이터 `store_item_size`
+--
+
+INSERT INTO `store_item_size` (`item_id`, `item_size`) VALUES
+(1, 'one size fits all'),
+(2, 'one size fits all'),
+(3, 'one size fits all'),
+(4, 'S'),
+(4, 'M'),
+(4, 'L'),
+(4, 'XL');
+
+-- --------------------------------------------------------
+
+--
+-- 테이블 구조 `store_orders`
+--
+
+CREATE TABLE IF NOT EXISTS `store_orders` (
+  `id` int(11) NOT NULL auto_increment,
+  `order_date` datetime NOT NULL,
+  `order_name` varchar(100) NOT NULL,
+  `order_address` varchar(255) NOT NULL,
+  `order_city` varchar(50) NOT NULL,
+  `order_state` char(2) NOT NULL,
+  `order_zip` varchar(10) NOT NULL,
+  `order_tel` varchar(25) NOT NULL,
+  `order_email` varchar(100) NOT NULL,
+  `item_total` float(6,2) NOT NULL,
+  `shipping_total` float(6,2) NOT NULL,
+  `authorization` varchar(50) NOT NULL,
+  `status` enum('processed','pending') NOT NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=euckr AUTO_INCREMENT=1 ;
+
+--
+-- 테이블의 덤프 데이터 `store_orders`
+--
+
+
+-- --------------------------------------------------------
+
+--
+-- 테이블 구조 `store_orders_items`
+--
+
+CREATE TABLE IF NOT EXISTS `store_orders_items` (
+  `id` int(11) NOT NULL auto_increment,
+  `order_id` int(11) NOT NULL,
+  `sel_item_id` int(11) NOT NULL,
+  `sel_item_qty` smallint(6) NOT NULL,
+  `sel_item_size` varchar(25) NOT NULL,
+  `sel_item_color` varchar(25) NOT NULL,
+  `sel_item_price` float(6,2) NOT NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=euckr AUTO_INCREMENT=1 ;
+
+--
+-- 테이블의 덤프 데이터 `store_orders_items`
+--
+
+
+-- --------------------------------------------------------
+
+--
+-- 테이블 구조 `store_shoppertrack`
+--
+
+CREATE TABLE IF NOT EXISTS `store_shoppertrack` (
+  `id` int(11) NOT NULL auto_increment,
+  `session_id` varchar(32) NOT NULL,
+  `sel_item_id` int(11) NOT NULL,
+  `sel_item_qty` smallint(6) NOT NULL,
+  `sel_item_size` varchar(25) NOT NULL,
+  `sel_item_color` varchar(25) NOT NULL,
+  `date_added` datetime NOT NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=euckr AUTO_INCREMENT=1 ;
+
+--
+-- 테이블의 덤프 데이터 `store_shoppertrack`
+--
+

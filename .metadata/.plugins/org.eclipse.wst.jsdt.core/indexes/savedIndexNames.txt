@@ -1,0 +1,3 @@
+INDEX VERSION 1.3+/Applications/mampstack-7.0.11-0/apache2/htdocs/phpsou/.metadata/.plugins/org.eclipse.wst.jsdt.core/indexes
+688379627.index
+2969360198.index

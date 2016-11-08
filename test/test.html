@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+<meta charset="utf-8">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+    $("#btn1").on('click', toggleMusic);
+	$("#btn2").on('click', startMusic);
+	$("#btn3").on('click', fastMusic);
+	$("#btn4").on('click', pMusic);
+	$("#btn5").on('click', auto_none_music);
+	$("#btn6").on('click', golist);
+}); 
+
+// music ===================================================
+var music;
+function toggleMusic(){
+	music = document.getElementById("myMusic");
+
+	var beforeStr = unescape(document.getElementById("list").src);
+	var afterStr = beforeStr.split('audios/');
+
+	$("#playlist").text(afterStr[1]);
+	
+	if(music.paused){
+		music.play();
+		$("#btn1").text("일시정지");
+	}else{
+		music.pause();
+		$("#btn1").text("음악재생");
+	}
+}
+
+function startMusic(){
+	music.currentTime = 0; //0부터 시작
+}
+
+function fastMusic(){
+	music.currentTime += 2; //2초씩 앞으로 넘김
+}
+
+function pMusic(){
+	music.currentTime -= 2; //2초씩 뒤로 넘김
+}
+
+function auto_none_music(){
+	if($("#auto_none").text() == "반복재생"){
+		$("#auto_none").text("한곡재생");
+	}else{
+		$("#auto_none").text("반복재생");
+	}
+}
+
+function golist(){
+	nextMusic("audios/Dr. Dre - The Next Episode ft. Snoop Dogg, Kurupt, Nate Dogg.mp3");
+}
+
+function nextMusic(list){
+	$("#musicControl").html('<audio controls autoplay id="myMusic">'
+		+ '<source src="' + list + '" type="audio/mp3" id="list"/>'
+		+ '</audio>');
+
+	var afterStr = list.split('audios/');
+	$("#playlist").text(afterStr[1]);
+}
+</script>
+</head>
+<body>
+
+<div id="musicControl">
+<audio id="myMusic" controls>
+    <!--<source src="audios/Dr. Dre - Still D.R.E. ft. Snoop Dogg.mp3" type="audio/mp3" id="list"/>-->
+    <source src="http://www.dailymotion.com/video/x2majy2_old-boy-ost-the-last-waltz_music" type="audio/mp3" id="list"/>
+</audio>
+</div>
+
+<div id="playlist"></div>
+
+<br>
+<button id="btn1">음악재생</button>
+<button id="btn2">|&lt;</button>
+<button id="btn4">&lt;&lt;</button>
+<button id="btn3">&gt;&gt;</button>
+<button id="btn5"><div id="auto_none">반복재생</div></button>
+<button id="btn6">다음곡</button>
+
+
+</body>
+</html>
+
+
+
+
+
+

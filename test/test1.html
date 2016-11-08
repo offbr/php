@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+<meta charset="utf-8">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script>
+
+var audio = new Audio();
+    audio.src = 'audios/Dr. Dre - The Next Episode ft. Snoop Dogg, Kurupt, Nate Dogg.mp3';
+
+
+</script>
+</head>
+<body>
+
+<div>
+</div>
+<div id="playlist"></div>
+<audio id="player" src="vincent.mp3"></audio>
+<br>
+	<button onclick="audio.play()">PLAY</button>
+    <button onclick="audio.pause()">PAUSE</button>
+    <input type="number" onchange="audio.currentTime=this.value"/>
+    <input type="number" onchange="audio.volume=this.value"/>
+<hr>
+
+<audio id="player" src="vincent.mp3"></audio>
+<div> 
+  <button onclick="document.getElementById('player').play()">Play</button> 
+  <button onclick="document.getElementById('player').pause()">Pause</button> 
+  <button onclick="document.getElementById('player').volume += 0.1">Vol+ </button> 
+  <button onclick="document.getElementById('player').volume -= 0.1">Vol- </button> 
+</div>
+
+<hr>
+
+<audio controls>
+  <source src="vincent.mp3" type="audio/mpeg"/>
+  <source src="vincent.ogg" type="audio/ogg"/>
+  <object type="application/x-shockwave-flash" data="media/OriginalMusicPlayer.swf" width="225" height="86"> 
+    <param name="movie" value="media/OriginalMusicPlayer.swf"/>
+    <param name="FlashVars" value="mediaPath=vincent.mp3" /> 
+  </object> 
+  <a href="vincent.mp3">Download this lovely song and wish you all the best!</a>
+</audio>
+
+
+</body>
+</html>
+
+
+
+
+
+

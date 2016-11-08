@@ -1,0 +1,3 @@
+defaultPHPServer=Default PHP Web Server
+eclipse.preferences.version=1
+phpServers=<server><hostname>localhost</hostname><port>8080</port><debuggerId>org.eclipse.php.debug.core.noneDebugger</debuggerId><document_root>/Applications/mampstack-7.0.11-0/apache2/htdocs</document_root><name>Default PHP Web Server</name><base_url>http\://localhost</base_url><id>php-server-75328df1-5fda-49f0-a397-913494bbd9d2</id></server>
